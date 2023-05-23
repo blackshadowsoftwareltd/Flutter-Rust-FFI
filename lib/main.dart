@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'ffi.dart' show init, printSomething;
+
 void main() {
   runApp(const MaterialApp(
     home: HomeScreen(),
@@ -14,7 +16,10 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       body: Center(
           child: ElevatedButton(
-        onPressed: () {},
+        onPressed: () {
+          init();
+          printSomething();
+        },
         child: const Text('FFI'),
       )),
     );
