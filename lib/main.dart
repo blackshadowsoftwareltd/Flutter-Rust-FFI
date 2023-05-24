@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 
 import 'ffi.dart' show init, printSomething;
@@ -14,14 +16,38 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-          child: ElevatedButton(
-        onPressed: () {
-          init();
-          printSomething();
-        },
-        child: const Text('FFI'),
-      )),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          ElevatedButton(
+            onPressed: () {
+              final start = DateTime.now();
+              _time();
+              log(DateTime.now().difference(start).toString());
+            },
+            child: const Text('Dart Loop'),
+          ),
+          const SizedBox(width: double.infinity, height: 10),
+          ElevatedButton(
+            onPressed: () {
+              init();
+              final start = DateTime.now();
+              printSomething();
+              log(DateTime.now().difference(start).toString());
+            },
+            child: const Text('Rust Loop'),
+          ),
+        ],
+      ),
     );
+  }
+
+  _time() {
+    int x = 0;
+    for (int i = 0; i < 1000000000; i++) {
+      x += i;
+    }
+    log('Sum : $x');
   }
 }

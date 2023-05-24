@@ -11,7 +11,7 @@ void init() {
       ? DynamicLibrary.open(
 
           ///? open dynamic library for linux using .so file path
-          '/home/remon/Flutter/f_test/rust/target/release/libr_test.so')
+          '/home/remon/Flutter/flutter_rust_ffi/rust/target/release/librust.so')
       : DynamicLibrary.process();
 }
 

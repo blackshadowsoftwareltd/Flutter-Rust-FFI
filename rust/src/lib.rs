@@ -2,5 +2,9 @@
 
 //? pub extern "C" is used to make the function available to C
 pub extern "C" fn print_something() {
-    println!("Print Rust Function")
+    let mut x: i128 = 0;
+    for i in 0..1000000000 {
+        x = x + i;
+    }
+    println!("Sum : {}", x)
 }
