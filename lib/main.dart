@@ -2,9 +2,10 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 
-import 'ffi.dart' show init, printSomething;
+import 'ffi.dart' show initDynamicLib, printSomething, sumTwoNumbers;
 
 void main() {
+  initDynamicLib();
   runApp(const MaterialApp(
     home: HomeScreen(),
   ));
@@ -31,12 +32,19 @@ class HomeScreen extends StatelessWidget {
           const SizedBox(width: double.infinity, height: 10),
           ElevatedButton(
             onPressed: () {
-              init();
               final start = DateTime.now();
               printSomething();
               log(DateTime.now().difference(start).toString());
             },
             child: const Text('Rust Loop'),
+          ),
+          const SizedBox(width: double.infinity, height: 10),
+          ElevatedButton(
+            onPressed: () {
+              final sum = sumTwoNumbers(10.0, 30.0);
+              log('Sum : $sum');
+            },
+            child: const Text('Calculate Sum'),
           ),
         ],
       ),

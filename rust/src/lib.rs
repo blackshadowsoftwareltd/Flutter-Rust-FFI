@@ -8,3 +8,8 @@ pub extern "C" fn print_something() {
     }
     println!("Sum : {}", x)
 }
+
+#[no_mangle]
+pub extern "C" fn sum_two_numbers(a: f64, b: f64) -> f64 {
+    a + b
+}
