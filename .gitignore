@@ -31,6 +31,8 @@ migrate_working_dir/
 .pub-cache/
 .pub/
 /build/
+/pubspec.lock
+pubspec.lock
 
 # Symbolication related
 app.*.symbols
@@ -42,3 +44,7 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+# rust 
+rust/target/
+rust/Cargo.lock
