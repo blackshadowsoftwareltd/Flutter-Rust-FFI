@@ -1,1 +1,1 @@
-/home/remon/Flutter/flutter_rust_ffi/rust/target/release/librust.so: /home/remon/Flutter/flutter_rust_ffi/rust/src/lib.rs
+/home/remon/Flutter/Flutter-Rust-FFI/rust/target/release/librust.so: /home/remon/Flutter/Flutter-Rust-FFI/rust/src/lib.rs
