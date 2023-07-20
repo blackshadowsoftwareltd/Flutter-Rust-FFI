@@ -26,3 +26,16 @@ pub extern "C" fn profile_concat(name: *const u8, age: i32) -> *const c_char {
         result_cstring.into_raw()
     }
 }
+
+// Define a callback function type for passing data to Dart
+type StreamCallback = extern "C" fn(*const u8, usize);
+
+#[no_mangle]
+pub extern "C" fn start_stream(callback: StreamCallback) {
+    // Simulate streaming data, replace this with your actual data source
+    let data = b"Hello, World!";
+    let len = data.len();
+
+    // Call the callback with the data and its length
+    callback(data.as_ptr(), len);
+}

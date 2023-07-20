@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 
 import 'ffi.dart' show initDynamicLib, printSomething, sumTwoNumbers;
+import 'stream.dart';
 import 'string_ffi.dart';
 
 void main() {
@@ -54,6 +55,13 @@ class HomeScreen extends StatelessWidget {
               log('Profile : $profile');
             },
             child: const Text('Profile Concat in Rust code'),
+          ),
+          const SizedBox(width: double.infinity, height: 10),
+          ElevatedButton(
+            onPressed: () async {
+              await startRustStream();
+            },
+            child: const Text('Stream'),
           ),
         ],
       ),
