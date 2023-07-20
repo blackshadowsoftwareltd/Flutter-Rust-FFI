@@ -59,7 +59,7 @@ class HomeScreen extends StatelessWidget {
           const SizedBox(width: double.infinity, height: 10),
           ElevatedButton(
             onPressed: () async {
-              await startRustStream();
+              startRustStream();
             },
             child: const Text('Stream'),
           ),

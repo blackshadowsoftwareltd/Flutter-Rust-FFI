@@ -1,6 +1,9 @@
 use std::ffi::c_char;
 use std::ffi::CStr; //? CStr is used to convert a C string to a Rust string
-use std::ffi::CString; //? CString is used to convert a Rust string to a C string
+use std::ffi::CString;
+use std::thread;
+use std::thread::sleep;
+use std::time::Duration; //? CString is used to convert a Rust string to a C string
 
 #[no_mangle] //? Derivative attribute. Every func needs to be marked with this attribute
 ///? pub extern "C" is used to make the function available to C
@@ -32,10 +35,27 @@ type StreamCallback = extern "C" fn(*const u8, usize);
 
 #[no_mangle]
 pub extern "C" fn start_stream(callback: StreamCallback) {
-    // Simulate streaming data, replace this with your actual data source
+    thread::spawn(move || {
+        stream_data(callback);
+    });
+}
+
+pub fn stream_data(callback: StreamCallback) {
     let data = b"Hello, World!";
     let len = data.len();
 
-    // Call the callback with the data and its length
-    callback(data.as_ptr(), len);
+    let mut i = 0;
+    let mut _byte = 0;
+    loop {
+        if i >= len {
+            break;
+        }
+        sleep(Duration::from_secs(1));
+        _byte = data[i];
+        println!("Byte : {}", _byte);
+        callback(&_byte as *const u8, 1);
+        println!("Byte : {:?}", _byte as *const u8);
+
+        i += 1;
+    }
 }

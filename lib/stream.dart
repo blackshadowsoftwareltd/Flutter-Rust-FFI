@@ -14,25 +14,19 @@ final startStream = dynamicLib
     .lookup<NativeFunction<StartStreamNative>>('start_stream')
     .asFunction<void Function(Pointer<NativeFunction<StreamCallback>>)>();
 
-// Dart function that will be called from Rust to receive streamed data
 void onDataReceived(Pointer<Uint8> data, int length) {
-  // Convert the data to a Dart list
   final dataList = data.asTypedList(length);
+  print(dataList);
   streamController.add(dataList);
-  // Process the streamed data here
   // ...
 }
 
-Future<void> startRustStream() async {
-  // Call the Rust function and pass the Dart callback
+void startRustStream() async {
   startStream(Pointer.fromFunction<StreamCallback>(onDataReceived));
-  // You can start listening to the stream now
-  // Listen to the stream
-  streamController.stream.listen((data) {
+
+  await for (final data in streamController.stream) {
     log(data.toString());
-    // Process the streamed data here
-    // ...
-  });
+  }
 }
 
-StreamController<Uint8List> streamController = StreamController<Uint8List>();
+final streamController = StreamController<Uint8List>();
