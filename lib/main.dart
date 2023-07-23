@@ -63,19 +63,19 @@ class HomeScreen extends StatelessWidget {
           const SizedBox(width: double.infinity, height: 10),
           Consumer(builder: (context, state, __) {
             state.watch(startRustProvider);
-            // final eventData = state.watch(rustEventProvider);
+            final eventData = state.watch(rustEventProvider);
 
-            // return eventData.when(
-            //   error: (e, _) => Text(e.toString()),
-            //   loading: () => const CircularProgressIndicator(),
-            //   data: (data) => Text(data.toString()),
-            // );
-            return ElevatedButton(
-              onPressed: () async {
-                // startRustStream();
-              },
-              child: const Text('Stream'),
+            return eventData.when(
+              error: (e, _) => Text(e.toString()),
+              loading: () => const CircularProgressIndicator(),
+              data: (data) => Text(String.fromCharCodes(data)),
             );
+            // return ElevatedButton(
+            //   onPressed: () async {
+            //     // startRustStream();
+            //   },
+            //   child: const Text('Stream'),
+            // );
           }),
         ],
       ),
