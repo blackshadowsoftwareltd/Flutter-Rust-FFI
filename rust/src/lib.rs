@@ -1,7 +1,6 @@
 use std::ffi::c_char;
 use std::ffi::CStr; //? CStr is used to convert a C string to a Rust string
 use std::ffi::CString;
-use std::thread;
 use std::thread::sleep;
 use std::time::Duration; //? CString is used to convert a Rust string to a C string
 
@@ -35,9 +34,7 @@ type StreamCallback = extern "C" fn(*const u8, usize);
 
 #[no_mangle]
 pub extern "C" fn start_stream(callback: StreamCallback) {
-    thread::spawn(move || {
-        stream_data(callback);
-    });
+    stream_data(callback);
 }
 
 pub fn stream_data(callback: StreamCallback) {

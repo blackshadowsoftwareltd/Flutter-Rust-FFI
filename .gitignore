@@ -48,3 +48,9 @@ app.*.map.json
 # rust 
 rust/target/
 rust/Cargo.lock
+
+/rust/target
+
+/rust/target/
+/rust/Cargo.lock
+/rust/Cargo.lock

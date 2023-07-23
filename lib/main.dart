@@ -1,15 +1,19 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'ffi.dart' show initDynamicLib, printSomething, sumTwoNumbers;
-import 'stream.dart';
+
+import 'stream/provider.dart';
 import 'string_ffi.dart';
 
 void main() {
   initDynamicLib();
-  runApp(const MaterialApp(
-    home: HomeScreen(),
+  runApp(const ProviderScope(
+    child: MaterialApp(
+      home: HomeScreen(),
+    ),
   ));
 }
 
@@ -57,12 +61,22 @@ class HomeScreen extends StatelessWidget {
             child: const Text('Profile Concat in Rust code'),
           ),
           const SizedBox(width: double.infinity, height: 10),
-          ElevatedButton(
-            onPressed: () async {
-              startRustStream();
-            },
-            child: const Text('Stream'),
-          ),
+          Consumer(builder: (context, state, __) {
+            state.watch(startRustProvider);
+            // final eventData = state.watch(rustEventProvider);
+
+            // return eventData.when(
+            //   error: (e, _) => Text(e.toString()),
+            //   loading: () => const CircularProgressIndicator(),
+            //   data: (data) => Text(data.toString()),
+            // );
+            return ElevatedButton(
+              onPressed: () async {
+                // startRustStream();
+              },
+              child: const Text('Stream'),
+            );
+          }),
         ],
       ),
     );
