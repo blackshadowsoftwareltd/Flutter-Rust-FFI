@@ -1,11 +1,11 @@
-import 'dart:async';
-import 'dart:developer';
-import 'dart:ffi';
-import 'dart:isolate';
-import 'dart:typed_data';
+import 'dart:async' show StreamController;
+import 'dart:developer' show log;
+import 'dart:ffi' show Pointer, Uint8, Uint8Pointer;
+import 'dart:isolate' show Isolate, ReceivePort, SendPort;
+import 'dart:typed_data' show Uint8List;
 
-import '../ffi.dart';
-import '../stream.dart';
+import '../../../ffi.dart' show initDynamicLib;
+import 'stream.dart' show StreamCallback, startStream;
 
 late SendPort sendPort;
 final streamController = StreamController<Uint8List>();

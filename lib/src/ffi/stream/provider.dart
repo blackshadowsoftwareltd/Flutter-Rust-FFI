@@ -1,10 +1,10 @@
-import 'dart:async';
-import 'dart:typed_data';
+import 'dart:async' show FutureOr;
+import 'dart:typed_data' show Uint8List;
 
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart'
+    show AsyncNotifier, AsyncNotifierProvider, StreamProvider;
 
-import '../stream.dart';
-import 'thread.dart';
+import 'thread.dart' show startThread, streamController;
 
 final rustEventProvider =
     StreamProvider<Uint8List>((ref) => streamController.stream);
