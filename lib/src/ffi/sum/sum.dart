@@ -1,6 +1,6 @@
 import 'dart:ffi' show Double, DynamicLibraryExtension, Void;
 
-import '../../../ffi.dart' show dynamicLib;
+import '../ffi.dart' show dynamicLib;
 
 ///? loop
 typedef PrintSomethingC = Void Function();

@@ -1,7 +1,7 @@
 import 'dart:ffi'
     show IntPtr, NativeFunction, NativeFunctionPointer, Pointer, Uint8, Void;
 
-import '../../../ffi.dart' show dynamicLib;
+import '../ffi.dart' show dynamicLib;
 
 typedef StreamCallback = Void Function(Pointer<Uint8>, IntPtr);
 

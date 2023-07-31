@@ -4,7 +4,7 @@ import 'dart:ffi' show Pointer, Uint8, Uint8Pointer;
 import 'dart:isolate' show Isolate, ReceivePort, SendPort;
 import 'dart:typed_data' show Uint8List;
 
-import '../../../ffi.dart' show initDynamicLib;
+import '../ffi.dart' show initDynamicLib;
 import 'stream.dart' show StreamCallback, startStream;
 
 late SendPort sendPort;

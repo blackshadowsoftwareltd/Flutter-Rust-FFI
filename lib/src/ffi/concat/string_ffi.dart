@@ -1,6 +1,6 @@
 import 'dart:ffi';
 import 'package:ffi/ffi.dart';
-import '../../../ffi.dart';
+import '../ffi.dart';
 
 typedef PCC = Pointer<Utf8> Function(Pointer<Uint8> name, Int32 age);
 typedef PCDart = Pointer<Utf8> Function(Pointer<Uint8> name, int age);
