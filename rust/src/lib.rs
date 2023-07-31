@@ -1,9 +1,10 @@
 use std::ffi::c_char;
 use std::ffi::CStr; //? CStr is used to convert a C string to a Rust string
 use std::ffi::CString;
+use std::os::raw::c_int;
+use std::sync::Mutex;
 use std::thread::sleep;
 use std::time::Duration; //? CString is used to convert a Rust string to a C string
-
 #[no_mangle] //? Derivative attribute. Every func needs to be marked with this attribute
 ///? pub extern "C" is used to make the function available to C
 pub extern "C" fn print_something() {
@@ -55,4 +56,13 @@ pub fn stream_data(callback: StreamCallback) {
 
         i += 1;
     }
+}
+
+static COUNTER: Mutex<c_int> = Mutex::new(0);
+
+#[no_mangle]
+pub extern "C" fn stream_to(value: c_int) {
+    let mut counter = COUNTER.lock().unwrap();
+    *counter += value;
+    println!("Event : {:?}, Sum : {:?}", value, *counter);
 }

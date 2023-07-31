@@ -6,6 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart'
 
 import '../ffi/concat/string_ffi.dart' show concatStringUsingRust;
 import '../ffi/stream/provider.dart' show rustEventProvider, startRustProvider;
+import '../ffi/stream_to/stream.dart';
 import '../ffi/sum/sum.dart' show printSomething, sumTwoNumbers;
 
 class HomeScreen extends StatelessWidget {
@@ -61,13 +62,13 @@ class HomeScreen extends StatelessWidget {
               loading: () => const CircularProgressIndicator(),
               data: (data) => Text(String.fromCharCodes(data)),
             );
-            // return ElevatedButton(
-            //   onPressed: () async {
-            //     // startRustStream();
-            //   },
-            //   child: const Text('Stream'),
-            // );
           }),
+          ElevatedButton(
+            onPressed: () async {
+              startStreamTo();
+            },
+            child: const Text('Stream'),
+          )
         ],
       ),
     );
