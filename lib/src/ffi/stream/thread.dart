@@ -4,6 +4,8 @@ import 'dart:ffi' show Pointer, Uint8, Uint8Pointer;
 import 'dart:isolate' show Isolate, ReceivePort, SendPort;
 import 'dart:typed_data' show Uint8List;
 
+import 'package:ffi/ffi.dart';
+
 import '../ffi.dart' show initDynamicLib;
 import 'stream.dart' show StreamCallback, startStream;
 
@@ -41,5 +43,8 @@ void onDataReceived(Pointer<Uint8> data, int length) {
 
 void startRustStream() async {
   initDynamicLib();
-  startStream(Pointer.fromFunction<StreamCallback>(onDataReceived));
+  String fullName = 'Hello People!';
+  final namePtr = fullName.toNativeUtf8();
+  startStream(
+      Pointer.fromFunction<StreamCallback>(onDataReceived), namePtr.cast());
 }

@@ -34,12 +34,19 @@ pub extern "C" fn profile_concat(name: *const u8, age: i32) -> *const c_char {
 type StreamCallback = extern "C" fn(*const u8, usize);
 
 #[no_mangle]
-pub extern "C" fn start_stream(callback: StreamCallback) {
-    stream_data(callback);
+pub extern "C" fn start_stream(callback: StreamCallback, name: *const u8) {
+    let mut full_name = String::new();
+    unsafe {
+        let name_str: &str = CStr::from_ptr(name as *const c_char)
+            .to_str()
+            .expect("Invalid UTF-8");
+        full_name.push_str(name_str);
+    }
+    stream_data(callback, full_name);
 }
 
-pub fn stream_data(callback: StreamCallback) {
-    let data = b"Hello, World!";
+pub fn stream_data(callback: StreamCallback, full_name: String) {
+    let data = full_name.as_bytes();
     let len = data.len();
 
     let mut i = 0;

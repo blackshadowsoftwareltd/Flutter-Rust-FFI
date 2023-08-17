@@ -6,8 +6,12 @@ import '../ffi.dart' show dynamicLib;
 typedef StreamCallback = Void Function(Pointer<Uint8>, IntPtr);
 
 typedef StartStreamNative = Void Function(
-    Pointer<NativeFunction<StreamCallback>>);
+    Pointer<NativeFunction<StreamCallback>>, Pointer<Uint8>);
 
 final startStream = dynamicLib
     .lookup<NativeFunction<StartStreamNative>>('start_stream')
-    .asFunction<void Function(Pointer<NativeFunction<StreamCallback>>)>();
+    .asFunction<
+        void Function(
+          Pointer<NativeFunction<StreamCallback>>,
+          Pointer<Uint8>,
+        )>();
