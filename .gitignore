@@ -54,3 +54,6 @@ rust/Cargo.lock
 /rust/target/
 /rust/Cargo.lock
 /rust/Cargo.lock
+/Cargo.lock
+Cargo.lock
+pubspec.lock
