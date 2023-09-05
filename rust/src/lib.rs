@@ -1,3 +1,4 @@
+pub mod db;
 use std::ffi::c_char;
 use std::ffi::CStr; //? CStr is used to convert a C string to a Rust string
 use std::ffi::CString;

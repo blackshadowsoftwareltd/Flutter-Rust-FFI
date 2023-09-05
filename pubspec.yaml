@@ -37,6 +37,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   ffi: ^2.0.2
   flutter_riverpod: ^2.3.6
+  path_provider: ^2.1.1
 
 dev_dependencies:
   flutter_test:

@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart'
     show AsyncValueX, Consumer;
 
 import '../ffi/concat/string_ffi.dart' show concatStringUsingRust;
+import '../ffi/db/sled.dart';
 import '../ffi/stream/provider.dart' show rustEventProvider, startRustProvider;
 import '../ffi/stream_to/stream.dart';
 import '../ffi/sum/sum.dart' show printSomething, sumTwoNumbers;
@@ -68,7 +69,13 @@ class HomeScreen extends StatelessWidget {
               startStreamTo();
             },
             child: const Text('Stream'),
-          )
+          ),
+          ElevatedButton(
+            onPressed: () async {
+              await openDb();
+            },
+            child: const Text('Open DB'),
+          ),
         ],
       ),
     );
