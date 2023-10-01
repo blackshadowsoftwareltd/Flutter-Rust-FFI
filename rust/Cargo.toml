@@ -1,8 +1,9 @@
 [package]
 name = "rust"
 version = "0.1.0"
+rust-version = "1.56"
 edition = "2021"
-authors = ["blackshadowsoftwareltd@gmail.com"]
+authors = ["Remon <blackshadowsoftwareltd@gmail.com>"]
 
 [lib]
 crate-type = ["cdylib", "staticlib"]
@@ -10,6 +11,9 @@ crate-type = ["cdylib", "staticlib"]
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-tokio = { version = "1.29.1", features = ["full"] }
+tokio = { version = "1.29", features = ["full"] }
 
 sled = "0.34"
+
+# notification
+notify-rust = "4.9"

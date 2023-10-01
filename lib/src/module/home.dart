@@ -6,6 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart'
 
 import '../ffi/concat/string_ffi.dart' show concatStringUsingRust;
 import '../ffi/db/sled.dart';
+import '../ffi/notification/notification.dart';
 import '../ffi/stream/provider.dart' show rustEventProvider, startRustProvider;
 import '../ffi/stream_to/stream.dart';
 import '../ffi/sum/sum.dart' show printSomething, sumTwoNumbers;
@@ -77,6 +78,16 @@ class HomeScreen extends StatelessWidget {
             child: const Text('Open DB'),
           ),
         ],
+      ),
+      floatingActionButton: ElevatedButton(
+        onPressed: () async => await showNotification(
+            'Rust Native Notification', 'Hello from Rust code'),
+        onLongPress: () async => await showPersistentNotification(
+            'Rust App',
+            'Rust Native Persistent Notification',
+            'Hello from Rust code',
+            const Duration(milliseconds: 10000)),
+        child: const Icon(Icons.notifications_on),
       ),
     );
   }
