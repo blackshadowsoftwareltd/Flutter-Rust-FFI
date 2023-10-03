@@ -15,4 +15,8 @@ final startRustProvider =
 class _StartRust extends AsyncNotifier<void> {
   @override
   FutureOr<void> build() async => await startThread();
+
+  void reStart() {
+    ref.invalidateSelf();
+  }
 }

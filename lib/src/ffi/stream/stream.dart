@@ -1,17 +1,18 @@
 import 'dart:ffi'
-    show IntPtr, NativeFunction, NativeFunctionPointer, Pointer, Uint8, Void;
+    show DynamicLibraryExtension, IntPtr, NativeFunction, Pointer, Uint8, Void;
+
+import 'package:ffi/ffi.dart' show Utf8;
 
 import '../ffi.dart' show dynamicLib;
 
-typedef StreamCallback = Void Function(Pointer<Uint8>, IntPtr);
+typedef RustStreamCallback = Pointer<NativeFunction<SendRecDataRust>>;
+typedef StartChannelR = Void Function(
+    RustStreamCallback callback, Pointer<Utf8> name);
+typedef StartChannelD = void Function(
+    RustStreamCallback callback, Pointer<Utf8> name);
 
-typedef StartStreamNative = Void Function(
-    Pointer<NativeFunction<StreamCallback>>, Pointer<Uint8>);
+typedef SendRecDataRust = Void Function(Pointer<Uint8> data, IntPtr len);
+typedef SendRecDataDart = void Function(Pointer<Uint8> data, IntPtr len);
 
-final startStream = dynamicLib
-    .lookup<NativeFunction<StartStreamNative>>('start_stream')
-    .asFunction<
-        void Function(
-          Pointer<NativeFunction<StreamCallback>>,
-          Pointer<Uint8>,
-        )>();
+final startStream =
+    dynamicLib.lookupFunction<StartChannelR, StartChannelD>('start_stream');

@@ -61,16 +61,22 @@ class HomeScreen extends StatelessWidget {
 
             return eventData.when(
               error: (e, _) => Text(e.toString()),
-              loading: () => const CircularProgressIndicator(),
-              data: (data) => Text(String.fromCharCodes(data)),
+              loading: () => TextButton(
+                  onPressed: () async =>
+                      state.read(startRustProvider.notifier).reStart(),
+                  child: const CircularProgressIndicator()),
+              data: (data) => TextButton(
+                  onPressed: () async =>
+                      state.read(startRustProvider.notifier).reStart(),
+                  child: Text(String.fromCharCodes(data))),
             );
           }),
+          const SizedBox(width: double.infinity, height: 10),
           ElevatedButton(
-            onPressed: () async {
-              startStreamTo();
-            },
+            onPressed: () async => startStreamTo(),
             child: const Text('Stream'),
           ),
+          const SizedBox(width: double.infinity, height: 10),
           ElevatedButton(
             onPressed: () async {
               await openDb();
