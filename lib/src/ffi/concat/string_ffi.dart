@@ -5,7 +5,8 @@ import '../ffi.dart';
 typedef PCC = Pointer<Utf8> Function(Pointer<Uint8> name, Int32 age);
 typedef PCDart = Pointer<Utf8> Function(Pointer<Uint8> name, int age);
 
-final profileConcat = dynamicLib.lookupFunction<PCC, PCDart>('profile_concat');
+Pointer<Utf8> Function(Pointer<Uint8>, int) profileConcat =
+    dynamicLib.lookupFunction<PCC, PCDart>('profile_concat');
 
 String concatStringUsingRust(String fullName, int age) {
   final namePtr = fullName.toNativeUtf8();

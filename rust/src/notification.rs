@@ -35,7 +35,7 @@ pub extern "C" fn show_persistent_notification(
         let duration = Duration::from_millis(timeout as u64);
         let time = Timeout::from(duration.clone());
 
-        let message = format!("{:?}. Duration : {:?}", message.clone(), duration);
+        let message = format!("{:?}. Duration : {:?}", message, duration);
         let message = message.as_str();
 
         match Notification::new()

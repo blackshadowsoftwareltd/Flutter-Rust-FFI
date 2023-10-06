@@ -1,3 +1,4 @@
+pub mod cross_beam;
 pub mod db;
 pub mod notification;
 use std::ffi::c_char;

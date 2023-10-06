@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart'
     show AsyncValueX, Consumer;
 
 import '../ffi/concat/string_ffi.dart' show concatStringUsingRust;
+import '../ffi/cross_beam/cross_beam.dart';
 import '../ffi/db/sled.dart';
 import '../ffi/notification/notification.dart';
 import '../ffi/stream/provider.dart' show rustEventProvider, startRustProvider;
@@ -82,6 +83,25 @@ class HomeScreen extends StatelessWidget {
               await openDb();
             },
             child: const Text('Open DB'),
+          ),
+          const SizedBox(width: double.infinity, height: 10),
+          Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              ElevatedButton(
+                onPressed: () async {
+                  await crossBeamSender();
+                },
+                child: const Text('Start Cross Beam Sender'),
+              ),
+              const SizedBox(width: 10),
+              ElevatedButton(
+                onPressed: () async {
+                  await crossBeamReceiver();
+                },
+                child: const Text('Start Cross Beam Receiver'),
+              ),
+            ],
           ),
         ],
       ),
